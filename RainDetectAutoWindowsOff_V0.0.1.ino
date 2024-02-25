@@ -17,6 +17,7 @@
 int rdRainSensor = 13 ;//define Digital Port 13 as RainDetectorInput
 int opServo ;//define Digital Port 2 as LEDOutputControler
 int waittime = 120;
+int timer = 0;
 void setup(){
     Serial.begin(9600);
     pinMode(rdRainSensor,IP);
@@ -24,4 +25,14 @@ void setup(){
 }
 void loop(){
     int rvRainSensor = dR(rdRainSensor);
+    if (rvRainSensor == 0){
+        timer++;
+    }else{
+        timer--;
+    }
+    if (timer !=0){
+        dW(opServo,Hi);
+    }else{
+        dW(opServo,Lo);
+    }
 }
